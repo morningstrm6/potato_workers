@@ -13,6 +13,13 @@ from telegram.ext import (
 )
 import gspread
 from google.oauth2.service_account import Credentials
+import sys, pkgutil, importlib
+logger.info(f"Python version: {sys.version}")
+try:
+    import telegram
+    logger.info(f"python-telegram-bot version: {getattr(telegram, '__version__', 'unknown')}")
+except Exception as e:
+    logger.exception("telegram import failed: %s", e)
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -184,3 +191,4 @@ app.add_handler(conv_handler)
 if __name__ == "__main__":
     logger.info("Bot started in webhook mode...")
     app.run_webhook(listen="0.0.0.0", port=PORT, url_path=BOT_TOKEN, webhook_url=f"{APP_URL}/{BOT_TOKEN}")
+
