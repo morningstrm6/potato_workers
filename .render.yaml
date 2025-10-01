@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: hr-onboarding-bot
+    env: python
+    plan: free
+    pythonVersion: "3.11"
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        fromSecret: BOT_TOKEN
+      - key: SPREADSHEET_ID
+        fromSecret: SPREADSHEET_ID
+      - key: GOOGLE_CREDS_JSON_CONTENT
+        fromSecret: GOOGLE_CREDS_JSON_CONTENT
+      - key: HR_TELEGRAM_USERNAME
+        fromSecret: HR_TELEGRAM_USERNAME
+      - key: ONBOARDING_IMAGE_URL
+        fromSecret: ONBOARDING_IMAGE_URL
+      - key: APP_URL
+        fromSecret: APP_URL
+      - key: PORT
+        value: "10000"
